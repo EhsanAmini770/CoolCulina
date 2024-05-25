@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import AppNavigator from './src/AppNavigator';
+import CustomSplashScreen from './src/components/CustomSplashScreen'; // Import the custom splash screen
+import './src/utils/firebaseConfig';
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const initializeApp = async () => {
+      // Perform all initialization tasks here (e.g., fetching initial data, authentication checks)
+      // Simulate loading with a timeout for demonstration
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      setLoading(false);
+    };
+
+    initializeApp();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      {loading && <CustomSplashScreen onFinished={() => setLoading(false)} />}
+      {!loading && <AppNavigator />}
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
