@@ -18,12 +18,12 @@ const RecipeModal = ({ modalVisible, setModalVisible, selectedRecipe, renderIngr
             source={{ uri: selectedRecipe?.imageUri }}
             style={styles.modalImage}
           />
-          <ScrollView contentContainerStyle={styles.scrollViewContent}>
-            <View style={styles.modalCaptionContainer}>
-              <Text style={styles.modalCaption}>
-                {selectedRecipe?.caption}
-              </Text>
-            </View>
+          <View style={styles.modalCaptionContainer}>
+            <Text style={styles.modalCaption}>
+              {selectedRecipe?.caption}
+            </Text>
+          </View>
+          <ScrollView contentContainerStyle={styles.scrollViewContent} style={styles.scrollView}>
             <Text style={styles.sectionTitle}>Ingredients:</Text>
             <View style={styles.ingredientsContainer}>
               {renderIngredients(selectedRecipe?.ingredients || "")}
@@ -65,11 +65,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    maxHeight: "80%", // Added to restrict the height of the modal
   },
   modalImage: {
     width: "100%",
     height: 200,
     borderRadius: 10,
+  },
+  scrollView: {
+    width: "100%", // Added to ensure the ScrollView takes up full width
+    flex: 1, // Added to ensure the ScrollView takes up remaining space
   },
   scrollViewContent: {
     alignItems: "center",
