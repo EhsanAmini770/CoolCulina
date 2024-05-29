@@ -1,4 +1,3 @@
-// emailValidation.js
 import axios from 'axios';
 
 // Validate email format
@@ -9,16 +8,17 @@ export const validateEmailFormat = (email) => {
 
 // Verify email existence using ZeroBounce
 export const verifyEmail = async (email) => {
-  const API_KEY = 'f5550e9cfe9f433eb3ce1f799290a676'; // Replace with your ZeroBounce API key
+  const API_KEY = '39f1d7bcbbe84facbb96a885d45b5092'; // Replace with your ZeroBounce API key
   try {
     const response = await axios.get(`https://api.zerobounce.net/v2/validate?api_key=${API_KEY}&email=${email}`);
+    console.log("ZeroBounce API response: ", response.data); // Log the API response for debugging
     if (response.data.status === "valid") {
       return { status: "valid", message: "Email is valid" };
     } else {
-      return { status: response.data.status, message: response.data.sub_status };
+      return { status: response.data.status, message: "Error. Please enter a valid email" };
     }
   } catch (error) {
     console.error("Error verifying email: ", error);
-    return { status: "error", message: "Failed to verify email" };
+    return { status: "error", message: "Error. Please enter a valid email" };
   }
 };

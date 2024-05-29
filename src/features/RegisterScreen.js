@@ -1,4 +1,3 @@
-// src/features/RegisterScreen.js
 import React, { useState } from "react";
 import {
   View, TextInput, Text, StyleSheet, Image, Alert, Pressable, ActivityIndicator
@@ -33,51 +32,61 @@ export default function RegisterScreen() {
     }
 
     if (!validateEmailFormat(email)) {
-      setEmailError("Please enter a valid email address"); // Custom error message
-      setIsLoading(false);
-      return;
-    }
-    
-
-    const emailVerificationResult = await verifyEmail(email);
-    if (emailVerificationResult.status !== 'valid') {
-      setEmailError(`Email verification failed: ${emailVerificationResult.message}`);
+      setEmailError("Error. Please enter a valid email");
       setIsLoading(false);
       return;
     }
 
-    fetchSignInMethodsForEmail(auth, email)
-      .then((methods) => {
-        if (methods.length > 0) {
-          setEmailError("Email is already registered");
-          setIsLoading(false);
-        } else {
-          createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-              const userRef = doc(db, "users", userCredential.user.uid);
-              setDoc(userRef, {
-                fullName,
-                dateOfBirth,
-                email,
-              })
-                .then(() => {
-                  navigation.replace("Main");
-                })
-                .catch((error) => {
-                  console.error("Error writing document: ", error);
-                  setIsLoading(false);
-                });
-            })
-            .catch((error) => {
-              Alert.alert("Registration Error", error.message);
-              setIsLoading(false);
-            });
-        }
-      })
-      .catch((error) => {
-        console.error("Error checking email: ", error);
+    try {
+      // Check if the email is already in use
+      const methods = await fetchSignInMethodsForEmail(auth, email);
+      if (methods.length > 0) {
+        setEmailError("Email already in use. Try logging in.");
         setIsLoading(false);
+        return;
+      }
+
+      // Verify email existence using the external API
+      const emailVerificationResult = await verifyEmail(email);
+      if (emailVerificationResult.status !== 'valid') {
+        setEmailError(emailVerificationResult.message);
+        setIsLoading(false);
+        return;
+      }
+
+      // If email is valid and not already in use, proceed with registration
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userRef = doc(db, "users", userCredential.user.uid);
+      await setDoc(userRef, {
+        fullName,
+        dateOfBirth,
+        email,
       });
+      navigation.replace("Main");
+
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        setEmailError("Email already in use. Try logging in.");
+      } else {
+        console.error("Error during registration: ", error);
+        Alert.alert("Registration Error", error.message);
+      }
+      setIsLoading(false);
+    }
+  };
+
+  const formatDateOfBirth = (text) => {
+    // Remove non-numeric characters
+    const cleaned = text.replace(/\D/g, '');
+
+    // Format the date as DD/MM/YYYY
+    const match = cleaned.match(/^(\d{0,2})(\d{0,2})(\d{0,4})$/);
+    if (match) {
+      const formatted = [match[1], match[2], match[3]].filter(Boolean).join('/');
+      setDateOfBirth(formatted);
+    } else {
+      setDateOfBirth(text);
+    }
   };
 
   const defaultOptions = {
@@ -100,10 +109,12 @@ export default function RegisterScreen() {
         style={commonStyles.input}
       />
       <TextInput
-        placeholder="Date of Birth (DD/MM/YYYY)"
+        placeholder="Date of Birth (01/01/2000)"
         value={dateOfBirth}
-        onChangeText={setDateOfBirth}
+        onChangeText={formatDateOfBirth}
         style={commonStyles.input}
+        keyboardType="numeric"
+        maxLength={10}
       />
       <TextInput
         placeholder="Email"
@@ -152,118 +163,3 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
-
-//logo path C:\\Users\\Pxy\\Desktop\\mobil-uygulama-gelistirme\\Projects\\CoolCulina\\CoolCulina\\assets\\logo.png
-
-
-
-
-
-// // src/features/RegisterScreen.js
-
-// import React, { useState } from "react";
-// import {
-//   View,
-//   TextInput,
-//   Text,
-//   StyleSheet,
-//   Image,
-//   Alert,
-//   Pressable,
-// } from "react-native";
-// import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-// import { useNavigation } from "@react-navigation/native";
-// import { commonStyles } from "../styles/styles";
-// import { doc, setDoc } from "firebase/firestore";
-// import { db } from "../utils/firebaseConfig"; // Import Firestore
-
-// export default function RegisterScreen() {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [fullName, setFullName] = useState("");
-//   const [dateOfBirth, setDateOfBirth] = useState("");
-//   const navigation = useNavigation();
-
-//   const handleRegister = () => {
-//     const auth = getAuth();
-//     if (!/^\d{2}\/\d{2}\/\d{4}$/.test(dateOfBirth)) {
-//       Alert.alert(
-//         "Invalid Date",
-//         "Date of birth must be in DD/MM/YYYY format."
-//       );
-//       return;
-//     }
-
-//     createUserWithEmailAndPassword(auth, email, password)
-//       .then((userCredential) => {
-//         // Successfully registered, now save additional data to Firestore
-//         const userRef = doc(db, "users", userCredential.user.uid); // Correctly reference the users collection and the document ID
-//         setDoc(userRef, {
-//           fullName,
-//           dateOfBirth,
-//           email,
-//         })
-//           .then(() => {
-//             navigation.replace("Main"); // Navigate to the main interface
-//           })
-//           .catch((error) => {
-//             console.error("Error writing document: ", error);
-//           });
-//       })
-//       .catch((error) => {
-//         alert(error.message);
-//       });
-//   };
-
-//   return (
-//     <View style={[commonStyles.screenContainer, styles.container]}>
-//       <Image
-//         source={require("../../assets/logo.jpg")}
-//         style={commonStyles.logo}
-//       />
-//       <TextInput
-//         placeholder="Full Name"
-//         value={fullName}
-//         onChangeText={setFullName}
-//         style={commonStyles.input}
-//       />
-//       <TextInput
-//         placeholder="Date of Birth (DD/MM/YYYY)"
-//         value={dateOfBirth}
-//         onChangeText={setDateOfBirth}
-//         style={commonStyles.input}
-//       />
-//       <TextInput
-//         placeholder="Email"
-//         value={email}
-//         onChangeText={setEmail}
-//         style={commonStyles.input}
-//       />
-//       <TextInput
-//         placeholder="Password"
-//         value={password}
-//         secureTextEntry
-//         onChangeText={setPassword}
-//         style={commonStyles.input}
-//       />
-//       <Pressable onPress={handleRegister} style={commonStyles.button}>
-//         <Text style={commonStyles.buttonText}>Register</Text>
-//       </Pressable>
-//       <Pressable
-//         onPress={() => navigation.navigate("Login")}
-//         style={[commonStyles.button, styles.loginButton]}
-//       >
-//         <Text style={commonStyles.buttonText}>I want to login</Text>
-//       </Pressable>
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {},
-//   loginButton: {
-//     marginTop: 10,
-//   },
-// });
-
-// //logo path C:\\Users\\Pxy\\Desktop\\mobil-uygulama-gelistirme\\Projects\\CoolCulina\\CoolCulina\\assets\\logo.png

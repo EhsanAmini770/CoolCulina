@@ -1,0 +1,64 @@
+import { useRef, useEffect, useState } from "react";
+import { Animated } from "react-native";
+
+const useFabAnimation = () => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const buttonWidth = useRef(new Animated.Value(56)).current;
+  const textOpacity = useRef(new Animated.Value(0)).current;
+  const textTranslateX = useRef(new Animated.Value(-20)).current;
+  const [descriptionVisible, setDescriptionVisible] = useState(true);
+
+  useEffect(() => {
+    Animated.timing(buttonWidth, {
+      toValue: 200,
+      duration: 500,
+      useNativeDriver: false,
+    }).start(() => {
+      Animated.parallel([
+        Animated.timing(textOpacity, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(textTranslateX, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        setTimeout(() => {
+          Animated.parallel([
+            Animated.timing(textOpacity, {
+              toValue: 0,
+              duration: 300,
+              useNativeDriver: true,
+            }),
+            Animated.timing(textTranslateX, {
+              toValue: -20,
+              duration: 300,
+              useNativeDriver: true,
+            }),
+          ]).start(() => {
+            Animated.timing(buttonWidth, {
+              toValue: 56,
+              duration: 500,
+              useNativeDriver: false,
+            }).start(() => setDescriptionVisible(false));
+          });
+        }, 3000);
+      });
+    });
+  }, []);
+
+  const fadeIn = () => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  return { fadeAnim, buttonWidth, textOpacity, textTranslateX, descriptionVisible, fadeIn };
+};
+
+export default useFabAnimation;
