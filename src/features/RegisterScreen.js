@@ -17,14 +17,36 @@ export default function RegisterScreen() {
   const [fullName, setFullName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({
+    fullName: false,
+    dateOfBirth: false,
+    email: false,
+    password: false,
+  });
   const navigation = useNavigation();
 
   const handleRegister = async () => {
     if (isLoading) return; // Prevent multiple submits
 
     setIsLoading(true);
-    const auth = getAuth();
+
+    // Check if all fields are filled
+    const errors = {
+      fullName: !fullName,
+      dateOfBirth: !dateOfBirth,
+      email: !email,
+      password: !password,
+    };
+
+    if (Object.values(errors).some(error => error)) {
+      setFieldErrors(errors);
+      Alert.alert("Missing Information", "Please fill all the fields.");
+      setIsLoading(false);
+      return;
+    }
+
     if (!/^\d{2}\/\d{2}\/\d{4}$/.test(dateOfBirth)) {
       Alert.alert("Invalid Date", "Date of birth must be in DD/MM/YYYY format.");
       setIsLoading(false);
@@ -37,8 +59,15 @@ export default function RegisterScreen() {
       return;
     }
 
+    if (password.length < 6) {
+      setPasswordError("Password should be at least 6 characters long.");
+      setIsLoading(false);
+      return;
+    }
+
     try {
       // Check if the email is already in use
+      const auth = getAuth();
       const methods = await fetchSignInMethodsForEmail(auth, email);
       if (methods.length > 0) {
         setEmailError("Email already in use. Try logging in.");
@@ -67,6 +96,8 @@ export default function RegisterScreen() {
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         setEmailError("Email already in use. Try logging in.");
+      } else if (error.code === 'auth/weak-password') {
+        setPasswordError("Password should be at least 6 characters long.");
       } else {
         console.error("Error during registration: ", error);
         Alert.alert("Registration Error", error.message);
@@ -105,34 +136,50 @@ export default function RegisterScreen() {
       <TextInput
         placeholder="Full Name"
         value={fullName}
-        onChangeText={setFullName}
-        style={commonStyles.input}
+        onChangeText={(text) => {
+          setFullName(text);
+          setFieldErrors((prev) => ({ ...prev, fullName: false }));
+        }}
+        style={[commonStyles.input, fieldErrors.fullName ? { borderColor: 'red' } : {}]}
       />
+      {fieldErrors.fullName && <Text style={{ color: 'red' }}>Please enter your full name.</Text>}
       <TextInput
         placeholder="Date of Birth (01/01/2000)"
         value={dateOfBirth}
-        onChangeText={formatDateOfBirth}
-        style={commonStyles.input}
+        onChangeText={(text) => {
+          formatDateOfBirth(text);
+          setFieldErrors((prev) => ({ ...prev, dateOfBirth: false }));
+        }}
+        style={[commonStyles.input, fieldErrors.dateOfBirth ? { borderColor: 'red' } : {}]}
         keyboardType="numeric"
         maxLength={10}
       />
+      {fieldErrors.dateOfBirth && <Text style={{ color: 'red' }}>Please enter your date of birth.</Text>}
       <TextInput
         placeholder="Email"
         value={email}
         onChangeText={(text) => {
           setEmail(text);
           setEmailError("");
+          setFieldErrors((prev) => ({ ...prev, email: false }));
         }}
-        style={[commonStyles.input, emailError ? { borderColor: 'red' } : {}]}
+        style={[commonStyles.input, fieldErrors.email ? { borderColor: 'red' } : {}, emailError ? { borderColor: 'red' } : {}]}
       />
-      {emailError && <Text style={{ color: 'red' }}>{emailError}</Text>}
+      {fieldErrors.email && <Text style={{ color: 'red' }}>Please enter your email.</Text>}
+      {emailError ? <Text style={{ color: 'red' }}>{emailError}</Text> : null}
       <TextInput
         placeholder="Password"
         value={password}
         secureTextEntry
-        onChangeText={setPassword}
-        style={commonStyles.input}
+        onChangeText={(text) => {
+          setPassword(text);
+          setPasswordError("");
+          setFieldErrors((prev) => ({ ...prev, password: false }));
+        }}
+        style={[commonStyles.input, fieldErrors.password ? { borderColor: 'red' } : {}]}
       />
+      {fieldErrors.password && <Text style={{ color: 'red' }}>Please enter your password.</Text>}
+      {passwordError ? <Text style={{ color: 'red' }}>{passwordError}</Text> : null}
       <Pressable onPress={handleRegister} style={commonStyles.button} disabled={isLoading}>
         {isLoading ? (
           <ActivityIndicator size="small" color="#FFFFFF" />
