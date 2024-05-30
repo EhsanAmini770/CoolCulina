@@ -23,7 +23,8 @@ const useFetchRecipes = () => {
       ...doc.data(),
     }));
     setRecipes(recipeData);
-  }, []);
+  }, []); // Empty dependency array means this runs only once after the initial render
+          //we don't want to run this every time the component re-renders it will be useless knk
 
   useEffect(() => {
     fetchUsers();
