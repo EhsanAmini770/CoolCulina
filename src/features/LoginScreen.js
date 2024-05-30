@@ -27,6 +27,7 @@ export default function LoginScreen() {
 
   useEffect(() => {
     const auth = getAuth();
+    console.log(auth);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         navigation.replace("Main"); // Navigate to the main interface
@@ -47,7 +48,7 @@ export default function LoginScreen() {
       .catch((error) => alert(error.message));
   };
 
-  const defaultOptions = {
+  const defaultOptions = { //lottie stuff animation stuff nobody cares about  :D
     loop: true,
     autoplay: true,
     animationData: cookingLogin,
