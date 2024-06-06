@@ -30,6 +30,10 @@ CoolCulina is a mobile application designed to help users discover recipes, crea
 - **Expo:** For easy development and management of the React Native project
 - **Google Natural Language API:** For processing and understanding text
 
+
+## Screenshots
+![Photo1](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/1.png)
+
 ## Installation
 
 ### Prerequisites
