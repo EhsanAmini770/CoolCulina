@@ -6,6 +6,7 @@ CoolCulina is a mobile application designed to help users discover recipes, crea
 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
+- [Screenshots](#Screenshots)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -33,19 +34,18 @@ CoolCulina is a mobile application designed to help users discover recipes, crea
 
 ## Screenshots
 
-![Photo1](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/1.png)
+<p align="center">
+  <img src="https://github.com/EhsanAmini770/CoolCulina/blob/master/images/1.png" alt="Photo1" width="200"/>
+  <img src="https://github.com/EhsanAmini770/CoolCulina/blob/master/images/2.png" alt="Photo2" width="200"/>
+  <img src="https://github.com/EhsanAmini770/CoolCulina/blob/master/images/3.png" alt="Photo3" width="200"/>
+  <img src="https://github.com/EhsanAmini770/CoolCulina/blob/master/images/4.png" alt="Photo4" width="200"/>
+</p>
+<p align="center">
+  <img src="https://github.com/EhsanAmini770/CoolCulina/blob/master/images/5.png" alt="Photo5" width="200"/>
+  <img src="https://github.com/EhsanAmini770/CoolCulina/blob/master/images/6.png" alt="Photo6" width="200"/>
+  <img src="https://github.com/EhsanAmini770/CoolCulina/blob/master/images/7.png" alt="Photo7" width="200"/>
+</p>
 
-![Photo2](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/2.png)
-
-![Photo3](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/3.png)
-
-![Photo4](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/4.png)
-
-![Photo5](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/5.png)
-
-![Photo6](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/6.png)
-
-![Photo7](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/7.png)
 
 ## Installation
 
