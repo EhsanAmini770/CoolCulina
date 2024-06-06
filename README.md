@@ -32,7 +32,20 @@ CoolCulina is a mobile application designed to help users discover recipes, crea
 
 
 ## Screenshots
+
 ![Photo1](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/1.png)
+
+![Photo2](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/2.png)
+
+![Photo3](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/3.png)
+
+![Photo4](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/4.png)
+
+![Photo5](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/5.png)
+
+![Photo6](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/6.png)
+
+![Photo7](https://github.com/EhsanAmini770/CoolCulina/blob/master/images/7.png)
 
 ## Installation
 
