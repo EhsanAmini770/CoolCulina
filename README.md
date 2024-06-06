@@ -151,4 +151,5 @@ Contributions are welcome! Please follow these steps:
 
 ## Contributors
 
+- Ehsan Amini ([@EhsanAmini770](https://github.com/EhsanAmini770))
 - Ahmed Sedki ([@Ahmed-Sedki](https://github.com/Ahmed-Sedki))
