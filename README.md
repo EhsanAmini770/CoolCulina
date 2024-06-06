@@ -1,4 +1,3 @@
-```markdown
 # CoolCulina
 
 CoolCulina is a mobile application designed to help users discover recipes, create personalized meal plans, and receive AI-based recommendations. The app offers various features such as browsing recipes, sharing personal recipes, finding recipes by ingredients, and managing daily calorie needs. Additionally, it includes a chatbot for users to interact with and receive suggestions from AI.
@@ -153,5 +152,3 @@ Contributions are welcome! Please follow these steps:
 ## Contributors
 
 - Ahmed Sedki ([@Ahmed-Sedki](https://github.com/Ahmed-Sedki))
-- Ehsan Amini ([@EhsanAmini770](https://github.com/EhsanAmini770))
-```
