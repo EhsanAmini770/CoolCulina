@@ -1,14 +1,13 @@
 {
-    "type": "service_account",
-    "project_id": "avid-tractor-421409",
-    "private_key_id": "5900e9cae0e9f5f76bfe12922419c24f542db828",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCepKHTaY6sbOYU\nquhfn5lOu6RzuCSHowipnjRNO3la0jvbLClUIewIdtRwJTH/m5lhqt2GxmsPMq+W\ndZmPUZHBqVl05jmC4XvZjTzBXgHReWdgjhU1igiIQn4VZREi+T5/W8Uwz3ERZ2VY\nTi12VF1DkUqVpCJ0MvzYiIdQNfgLHdmAkbWyRZuPtxlNZghhbuxjctcyYuvBm/jd\neYjAXkp4vXge2zUO2DgWnTx2SMNWT9Rh3126p86mpsZk+0R4o+K5SOFU6+wqsPse\ntihBc47vmVR7sVcOxVgEZUNH9itILLqv522w4GdyixfDklcYj7jy0xvUJiYtVKOc\nibByBgkLAgMBAAECggEAHv6DL068NSvBd+A8LhJ8XUmDw6gCWw2bL6hdB4nLF9dj\nIlrqaCmId87fill5/zpjKRW82gwB9qIsc/Td34ZMN83iUFh6e/uZutNBP3YiXM6f\nR9n6gs9JA3YaNAve4TpY34EKcZLVwFS3FB2R/EBXSFAmhj3fDVy40YU7CozAvUr0\ntCjqRmL2HQj1u1kpCpFDqVQTX+wNgtSFRdiJX8jZztdocDpNajPBv5zezGOnUL4r\nXlQDa9oIJoR7uN5EF9lCknoCPaityL6jj9NIQ/3OjZR7Znora3E0s7LEi2rh0vkK\nqP3LjqCloUdOX0WD3IDjikX9VotAgNFrgHqe0QSuYQKBgQDYm3r9dCUbhSTDTMlm\nky2AUQ/CWRs4Nt0HDzWwj9grU3y6/AGs17kFTqoOEa92wh01/35oCR4fiGMhaG2W\nTmmZpocKpPWZpTTtxJzMv2FubY5JMzOl8m205KetKTSG+9vaBT/HjIVRG+BYHoDM\noAOJLWe1j3ZTG0jkZGecaHf/vwKBgQC7fodGnLZxfGUDyCvwgaxiV8+DdEh48VAt\nVvxxQVqp1A3PI0ZYYVNDWTZP4JdOQB1DXN9x+jTAJFRk+sEVxTEzKlaT6jSiTtpq\noi39O2lULyDbjxPY03j74M+Tb/FINbSnXSZl/l0U3ElYleAiORzH0gZmGQI3wfPT\n+Yzb5u+JtQKBgQDBaXvVyxrDSwz7kpoXjH3JoRg4SsaCWILeJdekE51Lep3afOGm\nC237bjVsoKATo9rfd4bQsKuELo2NrCiGWPf0Kf1VJNzk196+HJyCOrVuHEc714tb\nt2/8YVvTxAJSMZwrPhqoPTJhrUmShZIupQbjO3bqaPKX3LomrfzSbXoREwKBgQCU\nHqtDz34aPYmX6UU9JVRIBNL9KJowYYNTrkqUNmsni0y1fUqPe6PJqurLQ8SEnwX/\nN5mWc3HE8W5yr95mEniB0UrAY9/c8ap/X0wxqAPX67treKbXPolvgvS5p0/YGgVz\nypURMlfaqQSQpSaCIthny7YeZldoMSMtLRJojxJhmQKBgA/RfmGdhvkZG8nsQMbH\n3FxnvUrZxF1pW+ZMYOF1UXVDn5SRoBzX8ijC8f9Z6R299cG8ic50llAlpwmrYcDO\nI859iR9yJCet2C0QklPbcDVUpUtQooS6NEXyZzftHtiTpMezUnNaAq1JenJLlW+T\ntF4G2Yd79Blyh+2oQ+MndOVO\n-----END PRIVATE KEY-----\n",
-    "client_email": "coolculina-7700@avid-tractor-421409.iam.gserviceaccount.com",
-    "client_id": "118365094670745786719",
-    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-    "token_uri": "https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/coolculina-7700%40avid-tractor-421409.iam.gserviceaccount.com",
-    "universe_domain": "googleapis.com"
-  }
-  
+  "type": "service_account",
+  "project_id": "your_project_id", 
+  "private_key_id": "your_private_key_id", 
+  "private_key": "-----BEGIN PRIVATE KEY-----\nyour_private_key\n-----END PRIVATE KEY-----\n", 
+  "client_email": "your_client_email", 
+  "client_id": "your_client_id", 
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "your_client_x509_cert_url", 
+  "universe_domain": "googleapis.com"
+}

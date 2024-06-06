@@ -40,7 +40,7 @@ app.post("/analyze-ingredients", async (req, res) => {
 
     // Call Spoonacular API to find recipes
     const spoonacularResponse = await axios.get(
-      `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientNames}&number=10&apiKey=0d2694fddbbb4fd6819d60ff78264062`
+      `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientNames}&number=10&apiKey=your_spoonacular_api_key`
     );
 
     res.json(spoonacularResponse.data);

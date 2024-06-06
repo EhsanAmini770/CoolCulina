@@ -8,7 +8,7 @@ export const validateEmailFormat = (email) => {
 
 // Verify email existence using ZeroBounce
 export const verifyEmail = async (email) => {
-  const API_KEY = '39f1d7bcbbe84facbb96a885d45b5092'; 
+  const API_KEY = 'your_zerobounce_api_key'; 
   try {
     const response = await axios.get(`https://api.zerobounce.net/v2/validate?api_key=${API_KEY}&email=${email}`);
     console.log("ZeroBounce API response: ", response.data); // Log the API response for debugging
