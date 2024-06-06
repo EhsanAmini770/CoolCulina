@@ -40,7 +40,7 @@ CoolCulina is a mobile application designed to help users discover recipes, crea
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/CoolCulina.git
+git clone https://github.com/EhsanAmini770/CoolCulina.git
 cd CoolCulina
 ```
 
