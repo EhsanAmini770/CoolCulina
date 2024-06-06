@@ -12,31 +12,17 @@ import {
 } from "react-native";
 import { getAuth, signOut, deleteUser } from "firebase/auth";
 import {
-  doc,
-  getDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-  updateDoc,
-  deleteDoc,
+  doc, getDoc, collection, query, where, getDocs, updateDoc, deleteDoc,
 } from "firebase/firestore";
 import { db } from "../utils/firebaseConfig";
 import { useNavigation } from "@react-navigation/native";
 import { launchImageLibrary } from "react-native-image-picker";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject,
-} from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { commonStyles, colors } from "../styles/styles";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Lottie from "react-lottie";
 import updatingAnimation from "../../assets/animations/updating.json";
 import BackButtonHandler from "../components/BackButtonHandler";
-import profileStyle from "../styles/profileStyle";
 import styles from "../styles/profileStyle";
 
 export default function ProfileScreen() {
@@ -58,8 +44,7 @@ export default function ProfileScreen() {
   const [uploading, setUploading] = useState(false);
   const [animationVisible, setAnimationVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [confirmDeleteModalVisible, setConfirmDeleteModalVisible] =
-    useState(false);
+  const [confirmDeleteModalVisible, setConfirmDeleteModalVisible] = useState(false);
 
   const navigation = useNavigation();
   const auth = getAuth();
@@ -241,7 +226,7 @@ export default function ProfileScreen() {
     <View style={styles.screenContainer}>
       <BackButtonHandler color="black" />
       <View style={styles.profileContainer}>
-        {userInfo.photoURL && (
+        {userInfo.photoURL ? (
           <View>
             <Image
               source={{ uri: userInfo.photoURL }}
@@ -249,7 +234,19 @@ export default function ProfileScreen() {
             />
             <Pressable style={styles.editIconContainer} onPress={selectImage}>
               <View style={styles.iconBorder}>
-              <Icon name="add" size={30} color={colors.softWhite} />
+                <Icon name="add" size={30} color={colors.softWhite} />
+              </View>
+            </Pressable>
+          </View>
+        ) : (
+          <View>
+            <Image
+              source={require("../../assets/placeholder.jpg")} // Placeholder image path
+              style={styles.profilePic}
+            />
+            <Pressable style={styles.editIconContainer} onPress={selectImage}>
+              <View style={styles.iconBorder}>
+                <Icon name="add" size={30} color={colors.softWhite} />
               </View>
             </Pressable>
           </View>
