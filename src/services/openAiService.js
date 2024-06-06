@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function getOpenAIResponse(userInfo) {  // Accept userInfo as a parameter
     const url = 'https://api.openai.com/v1/chat/completions';
-    const apiKey = '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';  // Replace with your OpenAI API key
+    const apiKey = 'Replace_with_your_OpenAI_API_key';  // Replace with your OpenAI API key
 
     const payload = {
         model: "gpt-3.5-turbo",
